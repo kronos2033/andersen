@@ -12,20 +12,15 @@ const makeObjectDeepCopy = (obj) => {
 
 // _________________________________________________________________________________
 
-const selectFromInterval = (arr, startInterval, endInterval) => {
-  const validInterval =
-    typeof startInterval === "number" && typeof endInterval === "number";
+const selectFromInterval = (arr, start, end) => {
+  const validValues = typeof start === "number" && typeof end === "number";
   const validArray =
     Array.isArray(arr) && arr.every((el) => typeof el === "number");
-  if (!validInterval || !validArray) {
+  if (!validValues || !validArray) {
     throw new Error("Ошибка!");
   }
-  let slicedArr =
-    startInterval < endInterval
-      ? arr.slice(startInterval, endInterval - 1)
-      : arr.slice(endInterval - 1, startInterval);
-
-  return slicedArr;
+  start > end && ([start, end] = [end, start]);
+  return arr.filter((item) => item >= start && item <= end);
 };
 
 // _________________________________________________________________________________
