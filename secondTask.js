@@ -1,6 +1,6 @@
 const makeObjectDeepCopy = (obj) => {
   const copyObj = {};
-  for (key in obj) {
+  for (let key in obj) {
     if (typeof obj[key] !== "object") {
       copyObj[key] = obj[key];
     } else {
