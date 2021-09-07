@@ -30,21 +30,17 @@ const selectFromInterval = (arr, startInterval, endInterval) => {
 
 // _________________________________________________________________________________
 
-const myIterable = { from: 1, to: 4 };
-makeObjectIterable(myIterable);
-for (let item of myIterable) {
-  console.log(item);
-}
-
-function makeObjectIterable(obj) {
-  if (
-    obj.from > obj.to ||
-    typeof obj.from !== "number" ||
-    typeof obj.to !== "number"
-  ) {
-    throw new Error("Ошибка!");
-  }
-  obj[Symbol.iterator] = function () {
+const myIterable = {
+  from: 1,
+  to: 4,
+  [Symbol.iterator]: function () {
+    if (
+      this.from > this.to ||
+      typeof this.from !== "number" ||
+      typeof this.to !== "number"
+    ) {
+      throw new Error("Ошибка!");
+    }
     return {
       from: this.from,
       to: this.to,
@@ -55,5 +51,9 @@ function makeObjectIterable(obj) {
         return { done: true };
       },
     };
-  };
+  },
+};
+
+for (let item of myIterable) {
+  console.log(item);
 }
