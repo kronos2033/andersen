@@ -1,10 +1,8 @@
 Array.prototype.myFilter = function (callback, arr) {
-  let context;
-  arr ? (context = arr) : (context = this);
   let result = [];
-  for (let i = 0; i < context.length; i++) {
-    if (callback.call(context, context[i], i, context)) {
-      result.push(context[i]);
+  for (let i = 0; i < this.length; i++) {
+    if (callback.call(arr, this[i], i, this)) {
+      result.push(this[i]);
     }
   }
   return result;
