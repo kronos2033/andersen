@@ -12,6 +12,6 @@ const createDebounceFunction = (callback, timeout) => {
   let customTimeout;
   return () => {
     clearTimeout(customTimeout);
-    customTimeout = setTimeout(callback, timeout);
+    customTimeout = setTimeout(() => callback.apply(this, args), timeout);
   };
 };
