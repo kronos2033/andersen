@@ -8,13 +8,13 @@ Array.prototype.myFilter = function (callback, arr) {
   return result;
 };
 
-const createDebounceFunction = (callback, timeout) => {
-  let customTimeout;
-  return () => {
-    clearTimeout(customTimeout);
-    customTimeout = setTimeout(
-      (...args) => callback.call(this, ...args),
-      timeout
-    );
+function createDebounceFunction(callback, wait) {
+  let timeout;
+  return function (...args) {
+    const later = function () {
+      callback.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
   };
-};
+}
