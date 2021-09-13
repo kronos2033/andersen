@@ -4,11 +4,11 @@ function concatStrings(string, sep) {
   let exit = false;
   let separator = validation(sep) ? sep : '';
   function curryingString(string) {
-    if (string === undefined) return result;
     if (validation(string)) {
       result += !exit ? separator + string : '';
     } else {
       exit = true;
+      return result;
     }
     return curryingString;
   }
@@ -17,10 +17,11 @@ function concatStrings(string, sep) {
 
 class Calculator {
   constructor(numberOne, numberTwo) {
-    if (typeof numberOne !== 'number' && typeof numberTwo !== 'number') {
-      throw new Error('Конструктор принимает только числа');
+    if (typeof numberOne !== 'number' || typeof numberTwo !== 'number') {
+      throw new Error('Необходипо передать два числа');
     }
-    (this.first = numberOne), (this.second = numberTwo);
+    this.first = numberOne;
+    this.second = numberTwo;
   }
 
   setX = (num) => {
@@ -55,7 +56,7 @@ class Calculator {
     if (this.second === 0) {
       throw new Error('На 0 делить нельзя');
     } else {
-      console.log(this.first - this.second);
+      console.log(this.first / this.second);
     }
   };
 }
